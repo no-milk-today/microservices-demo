@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0787fd1c-e9fe-4021-b021-333660d19c9a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/microservices-demo.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/order-application.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/user-application.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/settings.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/src/main/java/ru/practicum/order/application/OrderApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/src/main/java/ru/practicum/order/application/client/UserClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/src/main/java/ru/practicum/order/application/config/UserClientProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/src/main/java/ru/practicum/order/application/controller/OrderController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/src/main/java/ru/practicum/order/application/dto/OrderRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/src/main/java/ru/practicum/order/application/dto/OrderResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/src/main/java/ru/practicum/order/application/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/src/main/java/ru/practicum/order/application/mapper/OrderMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/src/main/java/ru/practicum/order/application/model/Order.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/src/main/java/ru/practicum/order/application/repository/OrderRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/src/main/java/ru/practicum/order/application/service/OrderService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/src/main/resources/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/src/test/java/ru/practicum/order/application/OrderApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/src/test/java/ru/practicum/order/application/client/UserClientTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/src/test/java/ru/practicum/order/application/controller/OrderControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/src/test/java/ru/practicum/order/application/mapper/OrderMapperTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/src/test/java/ru/practicum/order/application/repository/OrderRepositoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/src/test/java/ru/practicum/order/application/service/OrderServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/order-application/src/test/resources/application-test.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/settings.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/src/main/java/ru/practicum/template/TemplateApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/src/main/java/ru/practicum/template/controller/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/src/main/java/ru/practicum/template/dto/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/src/main/java/ru/practicum/template/exception/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/src/main/java/ru/practicum/template/mapper/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/src/main/java/ru/practicum/template/model/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/src/main/java/ru/practicum/template/repository/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/src/main/java/ru/practicum/template/service/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/src/main/resources/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/template-application/src/test/java/ru/practicum/template/TemplateApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/build.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/gradlew" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/gradlew.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/settings.gradle.kts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/src/main/java/ru/practicum/user/application/UserApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/src/main/java/ru/practicum/user/application/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/src/main/java/ru/practicum/user/application/dto/ErrorResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/src/main/java/ru/practicum/user/application/dto/UserRequestDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/src/main/java/ru/practicum/user/application/dto/UserResponseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/src/main/java/ru/practicum/user/application/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/src/main/java/ru/practicum/user/application/mapper/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/src/main/java/ru/practicum/user/application/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/src/main/java/ru/practicum/user/application/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/src/main/java/ru/practicum/user/application/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/src/main/resources/application.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/src/test/java/ru/practicum/user/application/UserApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/src/test/java/ru/practicum/user/application/controller/UserControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/src/test/java/ru/practicum/user/application/mapper/UserMapperTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/src/test/java/ru/practicum/user/application/repository/UserRepositoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/src/test/java/ru/practicum/user/application/service/UserServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user-application/src/test/resources/application-test.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+      <option value="repository" />
+    </option>
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/order-application">
+      <ProjectState />
+    </projectState>
+    <projectState path="$PROJECT_DIR$/user-application">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2vh9GyhXMZLAgk2tetZxLpOaZIS" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Tests in 'user-application.test'.executor": "Run",
+    "Gradle.user-application [clean build].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/env/ya/microservices-demo",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="Gradle.user-application [clean build]">
+    <configuration name="Tests in 'user-application.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/user-application" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="user-application [clean build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/user-application" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+            <option value="build" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="OrderApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="order-application.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="ru.practicum.order.application.OrderApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.user-application [clean build]" />
+        <item itemvalue="Gradle.Tests in 'user-application.test'" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.23774.435" />
+        <option value="bundled-js-predefined-d6986cc7102b-f27c65a3e318-JavaScript-IU-251.23774.435" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0787fd1c-e9fe-4021-b021-333660d19c9a" name="Changes" comment="" />
+      <created>1744586346725</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1744586346725</updated>
+      <workItem from="1744586347783" duration="3871000" />
+      <workItem from="1749020179480" duration="1248000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
