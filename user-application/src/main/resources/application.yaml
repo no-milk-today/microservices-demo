@@ -7,7 +7,7 @@ spring:
     password: ${SPRING_DATASOURCE_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: update # управляет схемой таблиц внутри уже существующей БД, но не создает саму базу данных, если она отсутствует
     show-sql: true
 
 server:
