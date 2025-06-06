@@ -1,0 +1,7 @@
+services:
+  notification-service:
+    build: .
+    ports:
+      - "${NOTIFICATION_SERVICE_PORT}:${NOTIFICATION_SERVICE_PORT}"
+    environment:
+      SERVER_PORT: ${NOTIFICATION_SERVICE_PORT}
