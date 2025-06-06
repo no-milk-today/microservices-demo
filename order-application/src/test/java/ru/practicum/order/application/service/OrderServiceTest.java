@@ -3,6 +3,7 @@ package ru.practicum.order.application.service;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -11,12 +12,13 @@ import ru.practicum.order.application.dto.OrderRequestDto;
 import ru.practicum.order.application.dto.OrderResponseDto;
 import ru.practicum.order.application.mapper.OrderMapper;
 import ru.practicum.order.application.model.Order;
+import ru.practicum.order.application.model.OrderCreateOutbox;
 import ru.practicum.order.application.repository.OrderRepository;
+import ru.practicum.order.application.repository.OutboxRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.verifyNoInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class OrderServiceTest {
@@ -32,13 +34,16 @@ class OrderServiceTest {
     private OrderRepository orderRepository;
 
     @Mock
+    private OutboxRepository outboxRepository;
+
+    @Mock
     private OrderMapper mapper;
 
     @InjectMocks
-    private OrderService orderService;
+    private OrderService underTest;
 
     @Test
-    @DisplayName("createOrder() — должен создать заказ, если пользователь существует")
+    @DisplayName("createOrder() — должен создать заказ и сохранить outbox entry, если пользователь существует")
     void shouldCreateOrderWhenUserExists() {
         OrderRequestDto request = OrderRequestDto.builder()
                 .userId(USER_ID)
@@ -67,11 +72,16 @@ class OrderServiceTest {
         when(orderRepository.save(orderToSave)).thenReturn(savedOrder);
         when(mapper.toDto(savedOrder)).thenReturn(responseDto);
 
-        OrderResponseDto response = orderService.createOrder(request);
+        OrderResponseDto response = underTest.createOrder(request);
 
         assertThat(response.getId()).isEqualTo(ORDER_ID);
-        assertThat(response.getProduct()).isEqualTo(PRODUCT);
         assertThat(response.getUserId()).isEqualTo(USER_ID);
+        assertThat(response.getProduct()).isEqualTo(PRODUCT);
+
+        ArgumentCaptor<OrderCreateOutbox> captor = ArgumentCaptor.forClass(OrderCreateOutbox.class);
+        verify(outboxRepository).save(captor.capture());
+        OrderCreateOutbox savedOutbox = captor.getValue();
+        assertThat(savedOutbox.getOrderId()).isEqualTo(ORDER_ID);
     }
 
     @Test
@@ -84,10 +94,10 @@ class OrderServiceTest {
 
         when(userClient.userExists(999L)).thenReturn(false);
 
-        assertThatThrownBy(() -> orderService.createOrder(request))
+        assertThatThrownBy(() -> underTest.createOrder(request))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("User does not exist");
 
-        verifyNoInteractions(mapper, orderRepository);
+        verifyNoInteractions(mapper, orderRepository, outboxRepository);
     }
 }

@@ -4,6 +4,7 @@
 
 - **`user-application`** — сервис управления пользователями
 - **`order-application`** — сервис управления заказами
+- **`notification-service`** — сервис уведомлений
 
 ## Архитектурные принципы
 
@@ -20,6 +21,22 @@
 - **Decompose by Subdomain** — `user-application` и `order-application` реализуют независимые бизнес-области;
 - **Database per Service** — у каждого сервиса своя база данных;
 - **Single Service per Container** — каждый сервис и каждая БД запускаются в отдельных контейнерах Docker.
+
+## Новые возможности
+
+Появился брокер **NUTS** для межсервисной коммуникации с (будущим) `notification-service`. Теперь при создании заказа с помощью метода `OrderService.createOrder(...)` выполняются следующие операции:
+
+- Сохранение записи в таблицу `orders`.
+- В той же транзакции сохранение записи в таблицу `order_create_outbox`.
+- Возвращается DTO нового заказа.
+
+Через секунду или чуть позже, метод `OutboxProcessor.process()` забирает запись из таблицы `order_create_outbox`, подтягивает соответствующий заказ из таблицы `orders`, сериализует его в JSON и отправляет «сырые» байты в топик `order.created` (или в другой согласованный топик). После успешной публикации запись удаляется из таблицы `order_create_outbox`.
+
+### Пример запроса через curl:
+```bash
+curl -X POST http://localhost:8082/orders \
+     -H "Content-Type: application/json" \
+     -d '{"userId": 1, "product": "Book"}'
 
 ## Схема проекта
 
