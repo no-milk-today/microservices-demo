@@ -23,6 +23,13 @@ services:
     ports:
       - "5433:5432"
 
+  nats:
+    image: nats:latest
+    container_name: nats
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+  
   order-service:
     build:
       context: ./order-application
@@ -39,6 +46,7 @@ services:
       USER_CLIENT_BASE_URL: ${USER_CLIENT_BASE_URL}
     depends_on:
       - order-db
+      - nats
 
   order-db:
     image: postgres:16
@@ -49,10 +57,14 @@ services:
       POSTGRES_PASSWORD: ${ORDER_DB_PASSWORD}
     ports:
       - "5434:5432"
-
-  nats:
-    image: nats:latest
-    container_name: nats
+        
+  notification-service:
+    build:
+      context: ./notification-service
+      dockerfile: Dockerfile
     ports:
-      - "4222:4222"
-      - "8222:8222"
+      - "${NOTIFICATION_SERVICE_PORT}:${NOTIFICATION_SERVICE_PORT}"
+    environment:
+      SERVER_PORT: ${NOTIFICATION_SERVICE_PORT}
+    depends_on:
+      - nats

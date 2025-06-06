@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: notification-service
+
+server:
+  port: ${SERVER_PORT:8083}
+
+application:
+  nats:
+    url: nats://localhost:4222
+  notifications:
+    order:
+      topic-name: "orders.create"
+      limit: 5
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+  endpoint:
+    health:
+      show-details: always
