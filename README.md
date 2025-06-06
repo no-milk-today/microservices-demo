@@ -4,7 +4,7 @@
 
 - **`user-application`** — сервис управления пользователями
 - **`order-application`** — сервис управления заказами
-- **`notification-service`** — сервис уведомлений (in progress)
+- **`notification-service`** — сервис уведомлений
 
 ## Архитектурные принципы
 
@@ -25,7 +25,7 @@
 
 ## Новые возможности
 
-Появился брокер **NUTS** для межсервисной коммуникации с (будущим) `notification-service`. Теперь при создании заказа с помощью метода `OrderService.createOrder(...)` выполняются следующие операции:
+Появился брокер **NATS** для межсервисной коммуникации с (будущим) `notification-service`. Теперь при создании заказа с помощью метода `OrderService.createOrder(...)` выполняются следующие операции:
 
 - Сохранение записи в таблицу `orders`.
 - В той же транзакции сохранение записи в таблицу `order_create_outbox`.
@@ -65,6 +65,7 @@
    ```bash
    (cd user-application && ./gradlew clean build)
    (cd order-application && ./gradlew clean build)
+   (cd notification-service && ./gradlew clean build)
    ```
 
 3. Запуск всех сервисов:
