@@ -6,6 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.practicum.user.application.dto.UserRequestDto;
 import ru.practicum.user.application.dto.UserResponseDto;
 import ru.practicum.user.application.mapper.UserMapper;
@@ -24,36 +25,43 @@ class UserServiceTest {
     private final static Long USER_ID = 1L;
     private final static String USER_NAME = "Alice";
     private final static String USER_EMAIL = "alice@yandex.ru";
+    private static final String USER_PASSWORD = "password123";
 
     @Mock
     private UserRepository repository;
 
     @Mock
+    private PasswordEncoder passwordEncoder;
+
+    @Mock
     private UserMapper mapper;
 
     @InjectMocks
-    private UserService service;
+    private UserService underTest;
 
     @Test
     @DisplayName("createUser() — должен сохранить и вернуть пользователя")
     void shouldCreateUser() {
-        UserRequestDto request = UserRequestDto.builder()
+        var request = UserRequestDto.builder()
                 .name(USER_NAME)
                 .email(USER_EMAIL)
+                .password(USER_PASSWORD)
                 .build();
 
-        User user = User.builder()
+        var user = User.builder()
                 .name(USER_NAME)
                 .email(USER_EMAIL)
+                .password(USER_PASSWORD) // Пароль не хэшируем в тестах
                 .build();
 
-        User saved = User.builder()
+        var saved = User.builder()
                 .id(USER_ID)
                 .name(USER_NAME)
                 .email(USER_EMAIL)
+                .password(USER_PASSWORD)
                 .build();
 
-        UserResponseDto responseDto = UserResponseDto.builder()
+        var responseDto = UserResponseDto.builder()
                 .id(USER_ID)
                 .name(USER_NAME)
                 .email(USER_EMAIL)
@@ -63,7 +71,7 @@ class UserServiceTest {
         when(repository.save(user)).thenReturn(saved);
         when(mapper.toDto(saved)).thenReturn(responseDto);
 
-        UserResponseDto result = service.createUser(request);
+        var result = underTest.createUser(request);
 
         assertThat(result.getId()).isEqualTo(USER_ID);
         assertThat(result.getName()).isEqualTo(USER_NAME);
@@ -73,13 +81,14 @@ class UserServiceTest {
     @Test
     @DisplayName("getUser(id) — должен вернуть пользователя, если он найден")
     void shouldReturnUserById() {
-        User user = User.builder()
+        var user = User.builder()
                 .id(USER_ID)
                 .name(USER_NAME)
                 .email(USER_EMAIL)
+                .password(USER_PASSWORD) // Пароль не хэшируем в тестах
                 .build();
 
-        UserResponseDto dto = UserResponseDto.builder()
+        var dto = UserResponseDto.builder()
                 .id(USER_ID)
                 .name(USER_NAME)
                 .email(USER_EMAIL)
@@ -88,7 +97,7 @@ class UserServiceTest {
         when(repository.findById(USER_ID)).thenReturn(Optional.of(user));
         when(mapper.toDto(user)).thenReturn(dto);
 
-        UserResponseDto result = service.getUser(USER_ID);
+        UserResponseDto result = underTest.getUser(USER_ID);
 
         assertThat(result.getId()).isEqualTo(USER_ID);
         assertThat(result.getName()).isEqualTo(USER_NAME);
@@ -102,7 +111,7 @@ class UserServiceTest {
 
         when(repository.findById(wrongId)).thenReturn(Optional.empty());
 
-        assertThatThrownBy(() -> service.getUser(wrongId))
+        assertThatThrownBy(() -> underTest.getUser(wrongId))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("User with ID 42 not found");
     }

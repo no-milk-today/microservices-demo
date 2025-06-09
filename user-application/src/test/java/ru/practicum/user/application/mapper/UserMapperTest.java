@@ -13,13 +13,14 @@ class UserMapperTest {
     private static final Long USER_ID = 1L;
     private static final String NAME = "Alice";
     private static final String EMAIL = "alice@yandex.ru";
+    private static final String PASSWORD = "password123";
 
     private final UserMapper mapper = new UserMapperImpl();
 
     @Test
     @DisplayName("Должен маппить UserRequestDto в User без id")
     void shouldMapToEntity() {
-        UserRequestDto dto = new UserRequestDto(NAME, EMAIL);
+        UserRequestDto dto = new UserRequestDto(NAME, EMAIL, PASSWORD);
 
         User user = mapper.toEntity(dto);
 

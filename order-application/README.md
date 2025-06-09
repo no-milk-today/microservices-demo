@@ -62,7 +62,16 @@ docker-compose up --build
 
 ## Примеры запросов
 
+### Login request (to get JWT token) in `user-application`
+
+```bash
+curl -X POST http://localhost:8081/api/login \
+     -H "Content-Type: application/json" \
+     -d '{"username": "alice@yandex.ru", "password": "strongPass123"}'
+```
+
 ### Создать заказ (предполагается, что пользователь с ID = 1 существует)
+Сюда подставить JWT-токен, полученный на предыдущем шаге, в заголовок `Authorization`
 
 ```bash
 curl -X POST http://localhost:8082/orders \
