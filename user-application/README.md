@@ -85,7 +85,7 @@ curl -X POST http://localhost:8081/api/login \
 ```
 
 ### Получить пользователя по ID
-Сюда подставить JWT-токен, полученный на предыдущем шаге, в заголовок `Authorization`
+Сюда подставить JWT-токен, полученный на предыдущем шаге, в заголовок `Authorization
 ```bash
 curl http://localhost:8081/users/1
 ```
