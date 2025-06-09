@@ -5,12 +5,19 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.practicum.user.application.dto.UserRequestDto;
 import ru.practicum.user.application.dto.UserResponseDto;
+import ru.practicum.user.application.security.JwtRequestFilter;
+import ru.practicum.user.application.security.JwtUtil;
+import ru.practicum.user.application.security.SecurityConfig;
 import ru.practicum.user.application.service.UserService;
 
 import static org.mockito.Mockito.any;
@@ -21,11 +28,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(UserController.class)
+@AutoConfigureMockMvc(addFilters = false)
 class UserControllerTest {
 
     private static final String BASE_URL = "/users";
+    private static final String REGISTER_URL = BASE_URL + "/register";
+
     private static final String NAME = "Alice";
     private static final String EMAIL = "alice@yandex.ru";
+    private static final String PASSWORD = "password123";
     private static final long USER_ID = 1L;
 
     @Autowired
@@ -42,16 +53,16 @@ class UserControllerTest {
 
     @BeforeEach
     void setUp() {
-        validRequest = new UserRequestDto(NAME, EMAIL);
+        validRequest = new UserRequestDto(NAME, EMAIL, PASSWORD);
         validResponse = new UserResponseDto(USER_ID, NAME, EMAIL);
     }
 
     @Test
-    @DisplayName("POST /users — должен вернуть 201 и созданного пользователя")
+    @DisplayName("POST /users/register — должен вернуть 201 и созданного пользователя")
     void shouldCreateUser() throws Exception {
         when(userService.createUser(any(UserRequestDto.class))).thenReturn(validResponse);
 
-        mockMvc.perform(post(BASE_URL)
+        mockMvc.perform(post(REGISTER_URL)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(toJson(validRequest)))
                 .andExpect(status().isCreated())
@@ -61,17 +72,18 @@ class UserControllerTest {
     }
 
     @Test
-    @DisplayName("POST /users — должен вернуть 400 при неверных данных")
+    @DisplayName("POST /users/register — должен вернуть 400 при неверных данных")
     void shouldReturn400WhenInvalid() throws Exception {
-        UserRequestDto invalidRequest = new UserRequestDto("", "not-an-email");
+        var invalidRequest = new UserRequestDto("", "not-an-email", "");
 
-        mockMvc.perform(post(BASE_URL)
+        mockMvc.perform(post(REGISTER_URL)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(toJson(invalidRequest)))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.message").value("Validation failed"))
                 .andExpect(jsonPath("$.errors.name").value("Name must not be blank"))
-                .andExpect(jsonPath("$.errors.email").value("Email must be valid"));
+                .andExpect(jsonPath("$.errors.email").value("Email must be valid"))
+                .andExpect(jsonPath("$.errors.password").value("Password must not be blank"));
     }
 
     @Test

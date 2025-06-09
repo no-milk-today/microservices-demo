@@ -1,12 +1,14 @@
 # User Application
 
 Этот микросервис отвечает за управление пользователями. Он предоставляет REST API для создания и получения пользователей по ID. Используется в других микросервисах (например, `order-application`) для проверки существования пользователя.
+Добавлена возможность регистрации пользователей и аутентификации с помощью oauth2 и JWT-токенов.
 
-Архитектурные паттерны:
+Паттерны:
 
 - **Decompose by Subdomain**
 - **Database per Service**
 - **Single Service per Container**
+- **Access Token**
 
 ---
 ## Структура проекта:
@@ -20,6 +22,7 @@ user-application/
 │   │   │   ├── mapper/
 │   │   │   ├── model/
 │   │   │   ├── repository/
+│   │   │   ├── security/
 │   │   │   └── service/
 │   │   └── resources/
 │   │       └── application.yml
@@ -64,16 +67,25 @@ docker-compose up --build
 
 ## Примеры запросов
 
-### Создать пользователя
+### Register New User
 
 ```bash
-curl -X POST http://localhost:8081/users \
+curl -X POST http://localhost:8081/users/register \
      -H "Content-Type: application/json" \
-     -d '{"name": "Alice", "email": "alice@yandex.ru"}'
+     -d '{"name": "Alice", "email": "alice@yandex.ru", "password": "strongPass123"}'
+```
+
+
+### Login request (to get JWT token)
+
+```bash
+curl -X POST http://localhost:8081/api/login \
+     -H "Content-Type: application/json" \
+     -d '{"username": "alice@yandex.ru", "password": "strongPass123"}'
 ```
 
 ### Получить пользователя по ID
-
+Сюда подставить JWT-токен, полученный на предыдущем шаге, в заголовок `Authorization
 ```bash
 curl http://localhost:8081/users/1
 ```

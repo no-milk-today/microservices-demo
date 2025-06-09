@@ -21,3 +21,11 @@ management:
   endpoint:
     health:
       show-details: always
+
+# Параметры для JWT
+security:
+  jwt:
+    # Секрет (должен быть достаточно длинным, например, 256-бит)
+    key: ${JWT_SECRET:ChangeThisToASecretKeyOfAdequateLength}
+    # Время жизни токена в минутах
+    expiration_time_minutes: ${JWT_EXPIRATION_MINUTES:60}
