@@ -2,13 +2,11 @@ package ru.practicum.user.application.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.practicum.user.application.dto.UserRequestDto;
@@ -17,8 +15,8 @@ import ru.practicum.user.application.mapper.UserMapper;
 import ru.practicum.user.application.model.User;
 import ru.practicum.user.application.repository.UserRepository;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -52,8 +50,11 @@ public class UserService implements UserDetailsService {
         log.info("Loading user by username: {}", username);
         User user = repository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User with email " + username + " not found"));
+        List<String> roles = user.getRoles();
         List<GrantedAuthority> authorities =
-                Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+                roles.stream()
+                        .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                        .collect(Collectors.toList());
 
         log.debug("Loaded user with email: {} and authorities: {}", user.getEmail(), authorities);
         return new org.springframework.security.core.userdetails.User(

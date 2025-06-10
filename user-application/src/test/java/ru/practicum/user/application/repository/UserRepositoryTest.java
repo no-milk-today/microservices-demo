@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import ru.practicum.user.application.model.User;
 
 import java.util.Optional;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,6 +16,8 @@ class UserRepositoryTest {
 
     private static final String NAME = "Alice";
     private static final String EMAIL = "alice@yandex.ru";
+    private static final String PASSWORD = "password123";
+    private static final Set<String> ROLES = Set.of("USER");
 
     @Autowired
     private UserRepository repository;
@@ -22,7 +25,7 @@ class UserRepositoryTest {
     @Test
     @DisplayName("save() — должен сохранить пользователя")
     void shouldSaveUser() {
-        User saved = repository.save(newUser(NAME, EMAIL));
+        User saved = repository.save(newUser(NAME, EMAIL, PASSWORD, ROLES));
 
         assertThat(saved.getId()).isNotNull();
         assertThat(saved.getName()).isEqualTo(NAME);
@@ -32,7 +35,7 @@ class UserRepositoryTest {
     @Test
     @DisplayName("findById() — должен вернуть пользователя, если найден")
     void shouldFindUserById() {
-        User saved = repository.save(newUser("Ivan", "ivan@yandex.ru"));
+        User saved = repository.save(newUser("Ivan", "ivan@yandex.ru", "password123", Set.of("USER")));
 
         Optional<User> result = repository.findById(saved.getId());
 
@@ -49,10 +52,12 @@ class UserRepositoryTest {
         assertThat(result).isEmpty();
     }
 
-    private User newUser(String name, String email) {
+    private User newUser(String name, String email, String password, Set<String> roles) {
         return User.builder()
                 .name(name)
                 .email(email)
+                .password(password)
+                .roles(roles)
                 .build();
     }
 }

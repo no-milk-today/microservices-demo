@@ -6,6 +6,9 @@ import ru.practicum.user.application.dto.UserRequestDto;
 import ru.practicum.user.application.dto.UserResponseDto;
 import ru.practicum.user.application.model.User;
 
+import java.util.List;
+import java.util.Set;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class UserMapperTest {
@@ -14,13 +17,14 @@ class UserMapperTest {
     private static final String NAME = "Alice";
     private static final String EMAIL = "alice@yandex.ru";
     private static final String PASSWORD = "password123";
+    private static final List<String> ROLES_LIST = List.of("USER");
 
     private final UserMapper mapper = new UserMapperImpl();
 
     @Test
     @DisplayName("Должен маппить UserRequestDto в User без id")
     void shouldMapToEntity() {
-        UserRequestDto dto = new UserRequestDto(NAME, EMAIL, PASSWORD);
+        UserRequestDto dto = new UserRequestDto(NAME, EMAIL, PASSWORD, ROLES_LIST);
 
         User user = mapper.toEntity(dto);
 
@@ -36,6 +40,7 @@ class UserMapperTest {
                 .id(USER_ID)
                 .name(NAME)
                 .email(EMAIL)
+                .roles(Set.of("USER"))
                 .build();
 
         UserResponseDto dto = mapper.toDto(user);

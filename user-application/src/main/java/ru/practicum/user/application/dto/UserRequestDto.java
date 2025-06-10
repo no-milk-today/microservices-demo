@@ -2,9 +2,12 @@ package ru.practicum.user.application.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -20,4 +23,7 @@ public class UserRequestDto {
 
     @NotBlank(message = "Password must not be blank")
     private String password;
+
+    @NotEmpty(message = "Roles must not be empty")
+    private List<String> roles;
 }

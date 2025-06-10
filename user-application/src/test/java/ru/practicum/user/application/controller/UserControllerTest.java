@@ -7,18 +7,15 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import ru.practicum.user.application.dto.UserRequestDto;
 import ru.practicum.user.application.dto.UserResponseDto;
-import ru.practicum.user.application.security.JwtRequestFilter;
-import ru.practicum.user.application.security.JwtUtil;
-import ru.practicum.user.application.security.SecurityConfig;
 import ru.practicum.user.application.service.UserService;
+
+import java.util.Collections;
+import java.util.List;
 
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.when;
@@ -37,6 +34,7 @@ class UserControllerTest {
     private static final String NAME = "Alice";
     private static final String EMAIL = "alice@yandex.ru";
     private static final String PASSWORD = "password123";
+    private static final List<String> ROLES = List.of("USER");
     private static final long USER_ID = 1L;
 
     @Autowired
@@ -53,7 +51,7 @@ class UserControllerTest {
 
     @BeforeEach
     void setUp() {
-        validRequest = new UserRequestDto(NAME, EMAIL, PASSWORD);
+        validRequest = new UserRequestDto(NAME, EMAIL, PASSWORD, ROLES);
         validResponse = new UserResponseDto(USER_ID, NAME, EMAIL);
     }
 
@@ -74,7 +72,7 @@ class UserControllerTest {
     @Test
     @DisplayName("POST /users/register — должен вернуть 400 при неверных данных")
     void shouldReturn400WhenInvalid() throws Exception {
-        var invalidRequest = new UserRequestDto("", "not-an-email", "");
+        var invalidRequest = new UserRequestDto("", "not-an-email", "", Collections.emptyList());
 
         mockMvc.perform(post(REGISTER_URL)
                         .contentType(MediaType.APPLICATION_JSON)
