@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 
 @Entity
-@Table(name = "exchange_rates", schema = "exchange_db")
+@Table(name = "exchange_rates")
 @Data
 @Builder
 @NoArgsConstructor

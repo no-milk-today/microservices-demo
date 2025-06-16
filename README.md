@@ -2,11 +2,9 @@
 
 Микросервисное приложение "Банк" на базе Spring Boot и Spring Cloud для демонстрации современных архитектурных паттернов.
 
-- **Exchange** - Конвертация валют
-- **Exchange Generator** - Генерация курсов валют
-- **`user-application`** — сервис управления пользователями
-- **`order-application`** — сервис управления заказами
-- **`notification-service`** — сервис уведомлений
+- **`exchange`** - Конвертация валют
+- **`exchange generator`** - Генерация курсов валют (todo)
+
 
 ## Архитектурные принципы
 
@@ -48,7 +46,7 @@
 1. Убедитесь, что у вас установлен Docker и Docker Compose.
 2. Сборка сервисов:
    ```bash
-   (cd user-application && ./gradlew clean build)
+   (cd exchange && ./gradlew clean build)
    (cd order-application && ./gradlew clean build)
    (cd notification-service && ./gradlew clean build)
    ```

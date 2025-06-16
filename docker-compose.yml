@@ -1,38 +1,34 @@
 services:
-  keycloak:
-    container_name: keycloak
+  keycloak-service:
+    container_name: keycloak-service
     image: quay.io/keycloak/keycloak:26.1.3
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
-      # Переменная для импорта рилма в Keycloak
-      KC_IMPORT: /opt/keycloak/data/import/realm-export.json
     command:
       - start-dev
-      - --import-realm
     ports:
-      - "8090:8080" # нужно изменить порт (внешний на 8090)
-    volumes:
-      - ./keycloak/config/realm-export.json:/opt/keycloak/data/import/realm-export.json:ro
+      - "8090:8080"
     networks:
       - back
     restart: unless-stopped
-    depends_on:
-      - db
   
-  exchange-service:
-    build:
-      context: ./exchange
-      dockerfile: Dockerfile
-    ports:
-      - "${SERVER_PORT}:${SERVER_PORT}"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://${EXCHANGE_DB_HOST}:5432/${EXCHANGE_DB_NAME}
-      SPRING_DATASOURCE_USERNAME: ${EXCHANGE_DB_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${EXCHANGE_DB_PASSWORD}
-      SERVER_PORT: ${SERVER_PORT}
-    depends_on:
-      - exchange-db
+#  exchange-service:
+#    build:
+#      context: ./exchange
+#      dockerfile: Dockerfile
+#    ports:
+#      - "${SERVER_PORT}:${SERVER_PORT}"
+#    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://${EXCHANGE_DB_HOST}:5432/${EXCHANGE_DB_NAME}
+#      SPRING_DATASOURCE_USERNAME: ${EXCHANGE_DB_USERNAME}
+#      SPRING_DATASOURCE_PASSWORD: ${EXCHANGE_DB_PASSWORD}
+#      SERVER_PORT: ${SERVER_PORT}
+#    depends_on:
+#      - exchange-db
+#      - keycloak-service
+#    networks:
+#      - back
 
   exchange-db:
     image: postgres:16
@@ -43,3 +39,9 @@ services:
       POSTGRES_PASSWORD: ${EXCHANGE_DB_PASSWORD}
     ports:
       - "5435:5432"
+    networks:
+      - back
+
+networks:
+  back:
+    driver: bridge
