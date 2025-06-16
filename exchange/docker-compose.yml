@@ -1,0 +1,22 @@
+services:
+  exchange-service:
+    build: .
+    ports:
+      - "${SERVER_PORT}:${SERVER_PORT}"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://${EXCHANGE_DB_HOST}:5432/${EXCHANGE_DB_NAME}
+      SPRING_DATASOURCE_USERNAME: ${EXCHANGE_DB_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${EXCHANGE_DB_PASSWORD}
+      SERVER_PORT: ${SERVER_PORT}
+    depends_on:
+      - exchange-db
+
+  exchange-db:
+    image: postgres:16
+    container_name: exchange-db
+    environment:
+      POSTGRES_DB: ${EXCHANGE_DB_NAME}
+      POSTGRES_USER: ${EXCHANGE_DB_USERNAME}
+      POSTGRES_PASSWORD: ${EXCHANGE_DB_PASSWORD}
+    ports:
+      - "5435:5432"
