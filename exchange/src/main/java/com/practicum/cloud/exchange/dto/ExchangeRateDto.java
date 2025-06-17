@@ -1,23 +1,17 @@
 package com.practicum.cloud.exchange.dto;
 
+import com.practicum.cloud.exchange.model.CurrencyCode;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ExchangeRateResponseDto {
-
-    private Long id;
-    private String currencyFrom;
-    private String currencyTo;
+public class ExchangeRateDto {
+    private CurrencyCode currency;
     private BigDecimal buyRate;
     private BigDecimal sellRate;
-    private LocalDateTime createdAt;
 }
+

@@ -55,8 +55,5 @@ docker-compose up --build
 
 ## endpoints:
 
-- GET /api/rates - получение всех курсов валют
-- GET /api/rates/{id} - получение курса по ID
-- POST /api/rates - создание нового курса
-- PUT /api/rates/{id} - обновление существующего курса
-- DELETE /api/rates/{id} - удаление курса
+- GET /api/rates - получение всех курсов валют для Front UI
+- PUT /api/rates/update - обновление курсов от Exchange Generator

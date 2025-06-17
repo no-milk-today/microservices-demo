@@ -22,29 +22,15 @@ public class ExchangeRate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "currency_from", nullable = false, length = 3)
-    private String currencyFrom;
+    @Column(nullable = false, length = 3)
+    private String currency; // USD, CNY (RUB не хранится, так как базовая = 1)
 
-    @Column(name = "currency_to", nullable = false, length = 3)
-    private String currencyTo;
-
-    /**
-     * Курс покупки
-     */
-    @Column(name = "buy_rate", nullable = false, precision = 10, scale = 6)
+    @Column(nullable = false, precision = 10, scale = 6)
     private BigDecimal buyRate;
 
-    /**
-     * Курс продажи
-     */
-    @Column(name = "sell_rate", nullable = false, precision = 10, scale = 6)
+    @Column(nullable = false, precision = 10, scale = 6)
     private BigDecimal sellRate;
 
-    @Column(name = "created_at", nullable = false)
-    private LocalDateTime createdAt;
-
-    @PrePersist
-    public void prePersist() {
-        createdAt = LocalDateTime.now();
-    }
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
 }

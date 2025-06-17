@@ -1,7 +1,6 @@
 package com.practicum.cloud.exchange.mapper;
 
-import com.practicum.cloud.exchange.dto.ExchangeRateRequestDto;
-import com.practicum.cloud.exchange.dto.ExchangeRateResponseDto;
+import com.practicum.cloud.exchange.dto.ExchangeRateDto;
 import com.practicum.cloud.exchange.model.ExchangeRate;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -10,12 +9,14 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ExchangeRateMapper {
-
     @Mapping(target = "id", ignore = true)
-    @Mapping(target = "createdAt", ignore = true)
-    ExchangeRate toEntity(ExchangeRateRequestDto dto);
+    @Mapping(target = "updatedAt", ignore = true)
+    ExchangeRate toEntity(ExchangeRateDto dto);
 
-    ExchangeRateResponseDto toDto(ExchangeRate exchangeRate);
+    ExchangeRateDto toDto(ExchangeRate entity);
 
-    List<ExchangeRateResponseDto> toDtoList(List<ExchangeRate> exchangeRates);
+    List<ExchangeRateDto> toDtoList(List<ExchangeRate> entities);
+
+    List<ExchangeRate> toEntityList(List<ExchangeRateDto> dtos);
 }
+
